@@ -1,7 +1,10 @@
-# Project_Generative AI Text Summarizer
-It is my first mini-project about exploring Generative A.I. 
-A simple Streamlit web app that uses a Generative AI model (BART) to summarize long text into concise paragraphs.
+# Project_Generative AI Text Summarizer App
+A simple Generative AI web app built with **Streamlit** and **Hugging Face Transformers** that summarizes large text, PDF, or uploaded files into concise paragraphs.
 ## Features
-1.  Uses Hugging Face Transformers
-2.  Real-time text summarization
-3.  Clean Streamlit UI
+- Choose between models: **facebook/bart-large-cnn** and **t5-base**
+- Adjust summary length (min and max)
+- Upload `.txt` or `.pdf` files for automatic summarization
+- Deployed easily on Hugging Face Spaces or Streamlit Cloud
+## Installation
+```bash
+pip install -r requirements.txt
