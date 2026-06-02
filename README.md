@@ -6,7 +6,7 @@ A simple Generative AI web app built with **Streamlit** and **Hugging Face Trans
 - Adjust summary length (min and max)
 - Upload `.txt` or `.pdf` files for automatic summarization
 - Deployed easily on Hugging Face Spaces or Streamlit Cloud
-- 
+  
 ## Installation
 ```bash
 pip install -r requirements.txt
