@@ -4,7 +4,6 @@ AI-Text-Summarizer/
 ├── summary.py (current version)
 │
 ├── chats.jpg
-├── icon.png
 ├── favicon.png
 │
 ├── requirements.txt
