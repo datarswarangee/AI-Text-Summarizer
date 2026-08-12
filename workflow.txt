@@ -1,0 +1,13 @@
+AI-Text-Summarizer/
+│
+├── gen_summary.py (old version)
+├── summary.py (current version)
+│
+├── chats.jpg
+├── icon.png
+├── favicon.png
+│
+├── requirements.txt
+├── README.md
+│
+└── venv/ (recommended)
