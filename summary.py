@@ -67,7 +67,6 @@ if chat_background:
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', sans-serif;
-            cursor: url('icon.png') 16 16, auto;
         }}
 
 
