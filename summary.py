@@ -5,16 +5,8 @@
 
 import os
 
-# ------------------------------------------------------------
-# Disable TensorFlow BEFORE importing Transformers
-# ------------------------------------------------------------
-
+# Disable TensorFlow before importing Transformers
 os.environ["USE_TF"] = "0"
-
-
-# ------------------------------------------------------------
-# Imports
-# ------------------------------------------------------------
 
 import base64
 import html
@@ -37,14 +29,10 @@ st.set_page_config(
 
 
 # ============================================================
-# LOAD BACKGROUND IMAGE
+# IMAGE LOADER
 # ============================================================
 
 def get_image_base64(image_path):
-    """
-    Convert a local image into Base64 so that it can be
-    directly embedded into Streamlit CSS.
-    """
 
     try:
         with open(image_path, "rb") as image_file:
@@ -70,28 +58,24 @@ if chat_background:
         <style>
 
         /* ==================================================
-           GLOBAL PAGE
+           GLOBAL
         ================================================== */
 
         html,
         body,
         [data-testid="stAppViewContainer"] {{
-
             margin: 0;
             padding: 0;
-
             font-family: 'Segoe UI', sans-serif;
-
             cursor: url('icon.png') 16 16, auto;
         }}
 
 
         /* ==================================================
-           MAIN APPLICATION BACKGROUND
+           BACKGROUND IMAGE
         ================================================== */
 
         [data-testid="stAppViewContainer"] {{
-
             background-image:
                 url("data:image/jpeg;base64,{chat_background}");
 
@@ -112,7 +96,6 @@ if chat_background:
         ================================================== */
 
         [data-testid="stHeader"] {{
-
             background: transparent;
         }}
 
@@ -121,23 +104,16 @@ if chat_background:
            MAIN CONTENT
         ================================================== */
 
-        [data-testid="stMain"] {{
-
-            background: transparent;
-        }}
-
-
         .main .block-container {{
-
             max-width: none;
 
-            padding-top: 25px;
+            padding-top: 10px;
 
-            padding-left: 80px;
+            padding-left: 30px;
 
-            padding-right: 80px;
+            padding-right: 30px;
 
-            padding-bottom: 90px;
+            padding-bottom: 70px;
         }}
 
 
@@ -146,10 +122,9 @@ if chat_background:
         ================================================== */
 
         .page-title {{
-
             text-align: center;
 
-            color: #222;
+            color: #000000;
 
             font-size: 34px;
 
@@ -157,7 +132,7 @@ if chat_background:
 
             margin-top: 5px;
 
-            margin-bottom: 5px;
+            margin-bottom: 4px;
         }}
 
 
@@ -166,51 +141,32 @@ if chat_background:
         ================================================== */
 
         .page-description {{
-
             text-align: center;
 
-            color: #555;
+            color: #000000;
 
-            font-size: 16px;
+            font-size: 15px;
 
-            margin-bottom: 20px;
+            margin-bottom: 12px;
         }}
 
 
         /* ==================================================
-           WHITE DOCUMENT AREA
+           PANEL HEADINGS
         ================================================== */
 
-        .document-area {{
-
-            background: rgba(255, 255, 255, 0.97);
-
-            border-radius: 6px;
-
-            padding: 25px;
-
-            min-height: 500px;
-
-            box-shadow:
-                0 2px 10px rgba(0, 0, 0, 0.15);
-
-            margin-bottom: 20px;
-        }}
-
-
-        /* ==================================================
-           SECTION HEADINGS
-        ================================================== */
-
-        .section-heading {{
-
-            color: #222;
+        .panel-heading {{
+            color: #000000;
 
             font-size: 20px;
 
             font-weight: 600;
 
-            margin-bottom: 10px;
+            padding-bottom: 8px;
+
+            margin-bottom: 8px;
+
+            border-bottom: 2px solid #d63384;
         }}
 
 
@@ -219,12 +175,11 @@ if chat_background:
         ================================================== */
 
         textarea {{
+            background-color: #ffffff !important;
 
-            background-color: white !important;
+            color: #000000 !important;
 
-            color: #222 !important;
-
-            border: 1px solid #ccc !important;
+            border: 2px solid #000000 !important;
 
             border-radius: 5px !important;
 
@@ -235,11 +190,15 @@ if chat_background:
 
 
         textarea:focus {{
-
-            border: 1px solid #d63384 !important;
+            border: 2px solid #d63384 !important;
 
             box-shadow:
                 0 0 0 1px #d63384 !important;
+        }}
+
+
+        textarea::placeholder {{
+            color: #777777 !important;
         }}
 
 
@@ -248,107 +207,65 @@ if chat_background:
         ================================================== */
 
         [data-testid="stFileUploader"] {{
+            background: #ffffff !important;
 
-            background: white;
+            border: 2px solid #d63384 !important;
 
-            border: 1px solid #ccc;
+            border-radius: 5px !important;
 
-            border-radius: 5px;
+            padding: 6px !important;
 
-            padding: 10px;
+            margin-top: 8px !important;
         }}
 
 
         /* ==================================================
-           SUMMARIZE BUTTON
+           FILE UPLOADER CONTENT
         ================================================== */
 
-        .stButton > button {{
+        [data-testid="stFileUploader"] section {{
+            background: #ffffff !important;
 
-            padding: 12px 20px;
-
-            margin-left: 0;
-
-            border: none;
-
-            border-radius: 5px;
-
-            background: #4CAF50;
-
-            color: white;
-
-            cursor: pointer;
-
-            font-size: 15px;
-
-            font-weight: 500;
-
-            width: 100%;
-        }}
-
-
-        .stButton > button:hover {{
-
-            background: #45a049;
-
-            color: white;
+            border: none !important;
         }}
 
 
         /* ==================================================
-           SUMMARY BOX
+           FILE UPLOADER TEXT
         ================================================== */
 
-        .summary-box {{
-
-            margin-top: 20px;
-
-            padding: 20px;
-
-            background: white;
-
-            border-radius: 6px;
-
-            color: #222;
-
-            line-height: 1.7;
-
-            border-left: 4px solid #d63384;
-
-            box-shadow:
-                0 1px 5px rgba(0, 0, 0, 0.08);
+        [data-testid="stFileUploader"] * {{
+            color: #000000 !important;
         }}
 
 
         /* ==================================================
-           AI LABEL
+           UPLOAD BUTTON
         ================================================== */
 
-        .bot-label {{
+        [data-testid="stFileUploader"] button {{
+            background: #f8c8dc !important;
 
-            color: #222;
+            color: #000000 !important;
 
-            font-weight: 600;
+            border: 1px solid #d63384 !important;
 
-            margin-bottom: 8px;
+            border-radius: 5px !important;
+
+            font-weight: 500 !important;
         }}
 
 
         /* ==================================================
-           SUMMARY TEXT
+           UPLOAD BUTTON HOVER
         ================================================== */
 
-        .summary-text {{
+        [data-testid="stFileUploader"] button:hover {{
+            background: #d63384 !important;
 
-            color: #222;
+            color: #ffffff !important;
 
-            font-size: 16px;
-
-            line-height: 1.7;
-
-            text-align: left;
-
-            white-space: pre-wrap;
+            border-color: #d63384 !important;
         }}
 
 
@@ -357,16 +274,169 @@ if chat_background:
         ================================================== */
 
         .file-info {{
-
             color: #d63384;
 
-            text-align: right;
+            font-size: 13px;
 
-            margin-top: 8px;
+            font-weight: 600;
+
+            margin-top: 7px;
+
+            margin-bottom: 5px;
+        }}
+
+
+        /* ==================================================
+           SUMMARIZE BUTTON
+        ================================================== */
+
+        .stButton > button {{
+            width: 100%;
+
+            padding: 11px 20px;
+
+            margin-top: 12px;
+
+            border: 2px solid #d63384;
+
+            border-radius: 5px;
+
+            background: #d63384;
+
+            color: #ffffff;
+
+            cursor: pointer;
+
+            font-size: 15px;
+
+            font-weight: 600;
+        }}
+
+
+        /* ==================================================
+           SUMMARIZE BUTTON HOVER
+        ================================================== */
+
+        .stButton > button:hover {{
+            background: #000000;
+
+            border-color: #000000;
+
+            color: #ffffff;
+        }}
+
+
+        /* ==================================================
+           SUMMARY BOX
+        ================================================== */
+
+        .summary-box {{
+            background: #ffffff;
+
+            border: 2px solid #000000;
+
+            border-radius: 5px;
+
+            min-height: 330px;
+
+            padding: 20px;
+
+            box-sizing: border-box;
+        }}
+
+
+        /* ==================================================
+           AI LABEL
+        ================================================== */
+
+        .ai-label {{
+            color: #d63384;
+
+            font-size: 17px;
+
+            font-weight: 600;
 
             margin-bottom: 10px;
+        }}
 
-            font-size: 14px;
+
+        /* ==================================================
+           SUMMARY TEXT
+        ================================================== */
+
+        .summary-content {{
+            color: #000000;
+
+            font-size: 16px;
+
+            line-height: 1.8;
+
+            text-align: left;
+
+            white-space: pre-wrap;
+        }}
+
+
+        /* ==================================================
+           EMPTY SUMMARY BOX
+        ================================================== */
+
+        .empty-summary {{
+            background: #ffffff;
+
+            border: 2px solid #000000;
+
+            border-radius: 5px;
+
+            min-height: 330px;
+
+            padding: 20px;
+
+            box-sizing: border-box;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            color: #777777;
+
+            font-size: 15px;
+
+            line-height: 1.7;
+        }}
+
+
+        /* ==================================================
+           EMPTY SUMMARY TITLE
+        ================================================== */
+
+        .empty-summary-title {{
+            color: #000000;
+
+            font-size: 17px;
+
+            font-weight: 600;
+
+            margin-bottom: 12px;
+        }}
+
+
+        /* ==================================================
+           EMPTY SUMMARY DESCRIPTION
+        ================================================== */
+
+        .empty-summary-text {{
+            color: #777777;
+
+            font-size: 15px;
+
+            line-height: 1.7;
         }}
 
 
@@ -375,19 +445,23 @@ if chat_background:
         ================================================== */
 
         [data-testid="stSidebar"] {{
-
-            background: rgba(255, 255, 255, 0.88);
+            background: rgba(255, 255, 255, 0.90);
 
             backdrop-filter: blur(5px);
 
             -webkit-backdrop-filter: blur(5px);
+
+            border-right: 2px solid #d63384;
         }}
 
 
+        /* ==================================================
+           SIDEBAR HEADINGS
+        ================================================== */
+
         [data-testid="stSidebar"] h2,
         [data-testid="stSidebar"] h3 {{
-
-            color: #222;
+            color: #000000;
         }}
 
 
@@ -396,40 +470,42 @@ if chat_background:
         ================================================== */
 
         [data-testid="stSidebar"] label {{
-
-            color: #333 !important;
+            color: #000000 !important;
 
             font-weight: 500;
         }}
 
 
         /* ==================================================
-           SELECT BOX
+           SIDEBAR SELECTBOX
         ================================================== */
 
         [data-testid="stSidebar"] [data-baseweb="select"] {{
-
             border-radius: 5px;
+
+            border: 1px solid #000000;
         }}
 
 
         /* ==================================================
-           SLIDER
+           SIDEBAR SLIDER
         ================================================== */
 
-        [data-testid="stSidebar"] [data-testid="stSlider"] {{
-
-            margin-bottom: 15px;
+        [data-testid="stSlider"] [role="slider"] {{
+            background-color: #d63384;
         }}
 
 
         /* ==================================================
-           WARNING / ALERT
+           ALERTS
         ================================================== */
 
         [data-testid="stAlert"] {{
+            border: 1px solid #d63384;
 
             border-radius: 5px;
+
+            color: #000000;
         }}
 
 
@@ -438,7 +514,6 @@ if chat_background:
         ================================================== */
 
         .custom-footer {{
-
             position: fixed;
 
             bottom: 0;
@@ -449,9 +524,9 @@ if chat_background:
 
             text-align: center;
 
-            background: #000;
+            background: #000000;
 
-            color: #fff;
+            color: #ffffff;
 
             padding: 6px 0;
 
@@ -468,28 +543,27 @@ if chat_background:
         @media (max-width: 900px) {{
 
             .main .block-container {{
+                padding-left: 20px;
 
-                padding-left: 25px;
-
-                padding-right: 25px;
+                padding-right: 20px;
             }}
 
             .page-title {{
-
                 font-size: 28px;
             }}
-        }}
 
+        }}
 
         </style>
         """,
         unsafe_allow_html=True
     )
 
+
 else:
 
     # --------------------------------------------------------
-    # Fallback if chats.jpg is missing
+    # FALLBACK IF chats.jpg IS MISSING
     # --------------------------------------------------------
 
     st.markdown(
@@ -497,17 +571,13 @@ else:
         <style>
 
         [data-testid="stAppViewContainer"] {
-
-            background: #111;
+            background: #ffffff;
         }
 
         .main .block-container {
-
-            padding-left: 80px;
-
-            padding-right: 80px;
-
-            padding-bottom: 90px;
+            padding-left: 30px;
+            padding-right: 30px;
+            padding-bottom: 70px;
         }
 
         </style>
@@ -552,9 +622,9 @@ st.markdown(
 st.sidebar.header("⚙️ Model & Parameters")
 
 
-# ------------------------------------------------------------
-# Model Selection
-# ------------------------------------------------------------
+# ============================================================
+# MODEL SELECTION
+# ============================================================
 
 model_choice = st.sidebar.selectbox(
     "Choose Model",
@@ -565,9 +635,9 @@ model_choice = st.sidebar.selectbox(
 )
 
 
-# ------------------------------------------------------------
-# Maximum Summary Length
-# ------------------------------------------------------------
+# ============================================================
+# MAXIMUM SUMMARY LENGTH
+# ============================================================
 
 max_len = st.sidebar.slider(
     "Maximum Summary Length",
@@ -578,9 +648,9 @@ max_len = st.sidebar.slider(
 )
 
 
-# ------------------------------------------------------------
-# Minimum Summary Length
-# ------------------------------------------------------------
+# ============================================================
+# MINIMUM SUMMARY LENGTH
+# ============================================================
 
 min_len = st.sidebar.slider(
     "Minimum Summary Length",
@@ -612,208 +682,261 @@ summarizer = load_model(model_choice)
 
 
 # ============================================================
-# WHITE DOCUMENT AREA
+# TWO-COLUMN LAYOUT
 # ============================================================
 
-st.markdown(
-    """
-    <div class="document-area">
-    """,
-    unsafe_allow_html=True
+input_column, summary_column = st.columns(
+    [1, 1],
+    gap="medium"
 )
 
 
 # ============================================================
-# INPUT SECTION
+# LEFT COLUMN — INPUT
 # ============================================================
 
-st.markdown(
-    """
-    <div class="section-heading">
-        ✍️ Input Text
-    </div>
-    """,
-    unsafe_allow_html=True
-)
-
-
-# ============================================================
-# TEXT INPUT
-# ============================================================
-
-text_input = st.text_area(
-    "Enter your text here:",
-    height=250,
-    label_visibility="collapsed",
-    placeholder="Paste the text you want to summarize here..."
-)
-
-
-# ============================================================
-# FILE UPLOAD SECTION
-# ============================================================
-
-st.markdown(
-    """
-    <div class="section-heading">
-        📎 Upload Document
-    </div>
-    """,
-    unsafe_allow_html=True
-)
-
-
-# ============================================================
-# FILE UPLOADER
-# ============================================================
-
-uploaded_file = st.file_uploader(
-    "Upload a .txt or .pdf file",
-    type=["txt", "pdf"],
-    label_visibility="collapsed"
-)
-
-
-# ============================================================
-# READ UPLOADED FILE
-# ============================================================
-
-if uploaded_file is not None:
+with input_column:
 
     # --------------------------------------------------------
-    # TXT FILE
+    # Input Heading
     # --------------------------------------------------------
 
-    if uploaded_file.type == "text/plain":
-
-        text_input = uploaded_file.read().decode(
-            "utf-8",
-            errors="ignore"
-        )
-
-        st.markdown(
-            f"""
-            <div class="file-info">
-                📄 File loaded: {html.escape(uploaded_file.name)}
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+    st.markdown(
+        """
+        <div class="panel-heading">
+            ✍🏻 Input Text
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
 
     # --------------------------------------------------------
-    # PDF FILE
+    # Text Input
     # --------------------------------------------------------
 
-    elif uploaded_file.type == "application/pdf":
+    text_input = st.text_area(
+        "Input Text",
+        height=250,
+        label_visibility="collapsed",
+        placeholder="Paste the text you want to summarize here..."
+    )
 
-        pdf_reader = PdfReader(uploaded_file)
-
-        extracted_pages = []
-
-        for page in pdf_reader.pages:
-
-            page_text = page.extract_text()
-
-            if page_text:
-
-                extracted_pages.append(page_text)
-
-
-        text_input = "\n".join(extracted_pages)
-
-
-        st.markdown(
-            f"""
-            <div class="file-info">
-                📄 PDF loaded: {html.escape(uploaded_file.name)}
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-
-
-# ============================================================
-# SUMMARIZE BUTTON
-# ============================================================
-
-summarize_button = st.button(
-    "🚀 Summarize"
-)
-
-
-# ============================================================
-# SUMMARIZATION LOGIC
-# ============================================================
-
-if summarize_button:
 
     # --------------------------------------------------------
-    # Check Input
+    # Upload Label
     # --------------------------------------------------------
 
-    if text_input and text_input.strip():
-
-        try:
-
-            # ------------------------------------------------
-            # Generate Summary
-            # ------------------------------------------------
-
-            with st.spinner("Generating summary..."):
-
-                summary = summarizer(
-                    text_input,
-                    max_length=max_len,
-                    min_length=min_len,
-                    do_sample=False
-                )
+    st.markdown(
+        """
+        <div class="file-info">
+            📎 Upload PDF or TXT
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
 
-            # ------------------------------------------------
-            # Extract Summary
-            # ------------------------------------------------
+    # --------------------------------------------------------
+    # File Upload
+    # --------------------------------------------------------
 
-            summary_text = summary[0]["summary_text"]
+    uploaded_file = st.file_uploader(
+        "Upload a .txt or .pdf file",
+        type=["txt", "pdf"],
+        label_visibility="collapsed"
+    )
 
 
-            # ------------------------------------------------
-            # Escape HTML
-            # ------------------------------------------------
+    # ========================================================
+    # PROCESS UPLOADED FILE
+    # ========================================================
 
-            safe_summary = html.escape(
-                summary_text
+    if uploaded_file is not None:
+
+        # ----------------------------------------------------
+        # TXT FILE
+        # ----------------------------------------------------
+
+        if uploaded_file.type == "text/plain":
+
+            text_input = uploaded_file.read().decode(
+                "utf-8",
+                errors="ignore"
             )
-
-
-            # ------------------------------------------------
-            # Summary Heading
-            # ------------------------------------------------
-
-            st.markdown(
-                """
-                <div class="section-heading">
-                    📄 Summary
-                </div>
-                """,
-                unsafe_allow_html=True
-            )
-
-
-            # ------------------------------------------------
-            # Summary Result
-            # ------------------------------------------------
 
             st.markdown(
                 f"""
-                <div class="summary-box">
+                <div class="file-info">
+                    🪭 {html.escape(uploaded_file.name)}
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
 
-                    <div class="bot-label">
-                        AI:
+
+        # ----------------------------------------------------
+        # PDF FILE
+        # ----------------------------------------------------
+
+        elif uploaded_file.type == "application/pdf":
+
+            pdf_reader = PdfReader(
+                uploaded_file
+            )
+
+            extracted_pages = []
+
+
+            for page in pdf_reader.pages:
+
+                page_text = page.extract_text()
+
+                if page_text:
+
+                    extracted_pages.append(
+                        page_text
+                    )
+
+
+            text_input = "\n".join(
+                extracted_pages
+            )
+
+
+            st.markdown(
+                f"""
+                <div class="file-info">
+                    📄 {html.escape(uploaded_file.name)}
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+
+    # ========================================================
+    # SUMMARIZE BUTTON
+    # ========================================================
+
+    summarize_button = st.button(
+        "🚀 Summarize"
+    )
+
+
+# ============================================================
+# RIGHT COLUMN — SUMMARY
+# ============================================================
+
+with summary_column:
+
+    # --------------------------------------------------------
+    # Summary Heading
+    # --------------------------------------------------------
+
+    st.markdown(
+        """
+        <div class="panel-heading">
+            📄 Summary
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+
+    # ========================================================
+    # GENERATE SUMMARY
+    # ========================================================
+
+    if summarize_button:
+
+        # ----------------------------------------------------
+        # CHECK INPUT
+        # ----------------------------------------------------
+
+        if text_input and text_input.strip():
+
+            try:
+
+                # ------------------------------------------------
+                # Generate summary
+                # ------------------------------------------------
+
+                with st.spinner(
+                    "Generating summary..."
+                ):
+
+                    summary = summarizer(
+                        text_input,
+                        max_length=max_len,
+                        min_length=min_len,
+                        do_sample=False
+                    )
+
+
+                # ------------------------------------------------
+                # Extract summary
+                # ------------------------------------------------
+
+                summary_text = summary[0][
+                    "summary_text"
+                ]
+
+
+                # ------------------------------------------------
+                # Protect HTML characters
+                # ------------------------------------------------
+
+                safe_summary = html.escape(
+                    summary_text
+                )
+
+
+                # ------------------------------------------------
+                # Display summary
+                # ------------------------------------------------
+
+                st.markdown(
+                    f"""
+                    <div class="summary-box">
+
+                        <div class="ai-label">
+                            AI:
+                        </div>
+
+                        <div class="summary-content">
+                            {safe_summary}
+                        </div>
+
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
+
+
+            except Exception as e:
+
+                st.error(
+                    f"Unable to generate the summary: {str(e)}"
+                )
+
+
+        # ----------------------------------------------------
+        # NO INPUT
+        # ----------------------------------------------------
+
+        else:
+
+            st.markdown(
+                """
+                <div class="empty-summary">
+
+                    <div class="empty-summary-title">
+                        No text to summarize
                     </div>
 
-                    <div class="summary-text">
-                        {safe_summary}
+                    <div class="empty-summary-text">
+                        Enter text or upload a document
+                        and click Summarize.
                     </div>
 
                 </div>
@@ -822,30 +945,29 @@ if summarize_button:
             )
 
 
-        except Exception as e:
-
-            st.error(
-                f"Unable to generate the summary: {str(e)}"
-            )
-
+    # ========================================================
+    # INITIAL SUMMARY STATE
+    # ========================================================
 
     else:
 
-        st.warning(
-            "Please provide text or upload a file first."
+        st.markdown(
+            """
+            <div class="empty-summary">
+
+                <div class="empty-summary-title">
+                    Your generated summary will appear here.
+                </div>
+
+                <div class="empty-summary-text">
+                    Enter text or upload a document
+                    and click Summarize.
+                </div>
+
+            </div>
+            """,
+            unsafe_allow_html=True
         )
-
-
-# ============================================================
-# CLOSE WHITE DOCUMENT AREA
-# ============================================================
-
-st.markdown(
-    """
-    </div>
-    """,
-    unsafe_allow_html=True
-)
 
 
 # ============================================================
@@ -855,7 +977,7 @@ st.markdown(
 st.markdown(
     """
     <div class="custom-footer">
-        © The copyrights of this work is to datwashere
+        © The work is copywrite!
     </div>
     """,
     unsafe_allow_html=True
