@@ -10,3 +10,5 @@ AI-Text-Summarizer/
 ├── README.md
 │
 └── venv/ (recommended)
+
+*EXTRA FEATURES (future scope):* font change options, highlights.
