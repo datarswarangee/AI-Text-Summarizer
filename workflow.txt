@@ -11,4 +11,4 @@ AI-Text-Summarizer/
 │
 └── venv/ (recommended)
 
-**EXTRA FEATURES (future scope):** font change options, highlights.
+**EXTRA FEATURES (future scope): font change options, highlights.
