@@ -11,4 +11,21 @@ AI-Text-Summarizer/
 │
 └── venv/ (recommended)
 
-**EXTRA FEATURES (future scope): font change options, highlights.
+-------------------------------------------------------
+
+INPUT DOCUMENT
+       │
+       ├──────────────► AI Summarization
+       │                      │
+       │                      ▼
+       │                 Summary
+       │
+       └──────────────► Importance Analysis
+                              │
+                 ┌────────────┴────────────┐
+                 ▼                         ▼
+          Important Words            Important Sentences
+                 │                         │
+                 ▼                         ▼
+           Highlighted                Highlighted
+           Keywords                   Text/Sections
