@@ -18,7 +18,6 @@ model_choice = st.sidebar.selectbox(
     ("facebook/bart-large-cnn", "t5-base")
 )
 
-
 max_len = st.sidebar.slider("Maximum Summary Length", 50, 500, 150, 10)
 min_len = st.sidebar.slider("Minimum Summary Length", 10, 100, 40, 5)
 
