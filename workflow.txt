@@ -1,6 +1,7 @@
 AI-Text-Summarizer/
 │
-├── gen_summary.py (old version)
+├── gen_summary.py (old version: 1)
+├── summary.py (old version: 2)
 ├── summary.py (current version)
 │
 ├── chats.jpg
